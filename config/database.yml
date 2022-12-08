@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: ucrbyicl
+  pool: 5
+  username: ucrbyicl
+  password: wKwZV6I9XVxY6YSaHyLofB5CBy5Kxhk_
+  host: babar.db.elephantsql.com
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: sxxrdthy
+  pool: 5
+  username: sxxrdthy
+  password: e327938wshO27Z-i6zQbDz9t8gNVCdpV
+  host: babar.db.elephantsql.com
