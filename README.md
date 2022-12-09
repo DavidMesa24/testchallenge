@@ -1,4 +1,17 @@
+## Considerations ##
+* This is a Sinatra app, so you can run it with `ruby app.rb` or with docker as described below.
+* It is *not necessary* to configure the postgres database. It is already hosted on a remote server.
+* Below you can see an example of a flow that you can follow to test the app. You can use raider id:8 and id:9 to test if you want.
 
+## Run and Enjoy ##
+* You can run the app with docker. Just run `docker-compose up` and it will be available on `localhost:4567`.
+* You can also run it with `ruby app.rb` and it will be available on `localhost:4567`:
+    * `bundle install`
+    * `ruby app.rb`
+  
+## Test ##
+* You can test the app with command $ `bundle exec rspec`
+* You should have 15 tests and 0 errors (i hope)
 ## Endpoints ##
 ### v1/ ###
 #### GET ####
@@ -32,3 +45,7 @@
 * The transaction is generated and paid in Api.
 
 ![img_6.png](img_6.png)
+
+## David Santiago Mesa Martínez. ##
+### davidmesa02@gmail.com ###
+### +57 310 576 5718 ###
