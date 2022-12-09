@@ -36,6 +36,7 @@
 ![img_3.png](img_3.png)
 
 * Rider (id:7) Request a ride (The program asign a free driver to the rider. Is there not a free driver, indicates an error. The ride start at rider position)
+
 ![img_4.png](img_4.png)
 
 * Driver (id:1) Finish the ride (The driver finish the ride and the program calculate the price of the ride)
