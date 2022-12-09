@@ -20,6 +20,7 @@
 ![img_2.png](img_2.png)
 
 * Rider (id:7) Request a payment source (Now the raider has a payment source and a acceptance token)
+
 ![img_3.png](img_3.png)
 
 * Rider (id:7) Request a ride (The program asign a free driver to the rider. Is there not a free driver, indicates an error. The ride start at rider position)
