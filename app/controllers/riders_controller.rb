@@ -24,7 +24,7 @@ class RidersController < Sinatra::Base
   def self.request_ride(id)
     rider = Rider.find(id)
     rider.request_ride(id)
-    ride = Ride.where(rider_id: rider.id).first
+    ride = rider.request_ride(id)
     ride
   end
 end
