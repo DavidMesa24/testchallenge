@@ -8,7 +8,6 @@ require './config/environments'
 
 require_relative './app/controllers/drivers_controller'
 require_relative './app/controllers/riders_controller'
-require_relative './app/controllers/rides_controller'
 require_relative './app/models/drivers_model'
 require_relative './app/models/riders_model'
 require_relative './app/models/payment_source'
