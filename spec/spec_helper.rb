@@ -7,7 +7,7 @@ require 'rack/test'
 
 require_relative '../app.rb'
 
-set :environment, :development
+set :environment, :test
 
 ActiveRecord::Base.logger.level = 1
 

@@ -11,7 +11,7 @@
   
 ## Test ##
 * You can test the app with command $ `bundle exec rspec`
-* You should have 15 tests and 0 errors (i hope)
+* You should have 16 tests and 0 errors (I hope)
 ## Endpoints ##
 ### v1/ ###
 #### GET ####

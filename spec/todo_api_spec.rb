@@ -1,48 +1,64 @@
-require "spec_helper"
+require 'spec_helper'
 RSpec.describe DriversController, type: :controller do
 
   def app
     Sinatra::Application
   end
-  describe "GET /v1/drivers" do
-    it "returns http success" do
-      get "/v1/drivers"
+  describe 'GET /v1/drivers' do
+    it 'returns http success' do
+      get '/v1/drivers'
       expect(last_response.status).to be(200)
     end
   end
 
-  describe "GET /v1/drivers/1" do
-    it "returns http success" do
-      get "/v1/drivers/1"
+  describe 'GET /v1/drivers/1' do
+    it 'returns http success' do
+      get '/v1/drivers/1'
       expect(last_response.status).to be(200)
     end
   end
 
-  describe "GET /v1/riders" do
-    it "returns http success" do
-      get "/v1/riders"
+  describe 'GET /v1/riders' do
+    it 'returns http success' do
+      get '/v1/riders'
       expect(last_response.status).to be(200)
     end
   end
 
-  describe "GET /v1/riders/1" do
-    it "returns http success" do
-      get "/v1/riders/1"
+  describe 'GET /v1/riders/1' do
+    it 'returns http success' do
+      get '/v1/riders/1'
       expect(last_response.status).to be(200)
     end
   end
 
-  describe "GET /v1/riders/1/request_ride" do
-    it "returns http success" do
-      get "v1/riders/4/request_ride"
+  describe 'GET /v1/riders/1/request_ride' do
+    before do
+      it 'returns http success' do
+        get 'v1/riders/1/request_ride'
+        expect(last_response.status).to be(200)
+      end
+      after do
+        get '/v1/drivers/1/finish_ride'
+      end
+    end
+  end
+
+
+  describe 'GET /v1/drivers/1/finish_ride' do
+    it 'returns http success' do
+      get '/v1/drivers/1/finish_ride'
       expect(last_response.status).to be(200)
     end
   end
 
-  describe "GET /v1/drivers/1/finish_ride" do
-    it "returns http success" do
-      get "/v1/drivers/2/finish_ride"
-      expect(last_response.status).to be(200)
+  describe 'Ryder', type: :model do
+    it 'can request a ride' do
+      rider = Rider.create(rider)
+      ride = rider.request_ride(2)
+      driver = Driver.find(ride.driver_id)
+      driver.finish_ride(ride.id)
+      expect(ride).to eq(Ride.last)
     end
   end
 end

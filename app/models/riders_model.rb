@@ -53,7 +53,6 @@ class Rider < ActiveRecord::Base
   end
 
   def request_ride(id)
-
     rider = Rider.find(id)
     if rider.payment_source_id.nil?
       error = {
@@ -69,8 +68,8 @@ class Rider < ActiveRecord::Base
         ride = Ride.create(
           driver_id: driver.id,
           rider_id: rider.id,
-          current_latitude: rider.current_latitude,
-          current_longitude: rider.current_longitude,
+          current_latitude: rider.current_latitude.to_i,
+          current_longitude: rider.current_longitude.to_i,
           created_at: Time.now,
           base_fee: 3500,
           status: 'IN_PROGRESS'

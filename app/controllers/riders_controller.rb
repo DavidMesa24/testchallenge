@@ -23,7 +23,18 @@ class RidersController < Sinatra::Base
 
   def self.request_ride(id)
     rider = Rider.find(id)
-    ride = rider.request_ride(id)
-    ride
+    if rider
+      ride = rider.request_ride(id)
+      ride
+    else
+      error = {
+        "error": {
+          "type": 'NOT_FOUND',
+          "reason": 'No raider found'
+        }
+      }
+      error
+    end
+
   end
 end

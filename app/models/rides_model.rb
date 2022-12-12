@@ -11,13 +11,13 @@ class Ride < ActiveRecord::Base
   end
 
   def calculate_total_amount
-    self.duration = (self.updated_at - self.created_at)/60
-    price_distance = 1000 * self.distance_km
-    price_duration = 200 * self.duration
+    self.duration = (updated_at - created_at) / 60
+    price_distance = 1000 * distance_km
+    price_duration = 200 * duration
     base_fee = self.base_fee
 
     self.charge = base_fee + price_distance + price_duration
-    self.save
+    save
   end
 
 end

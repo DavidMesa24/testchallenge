@@ -39,7 +39,6 @@ class Driver < ActiveRecord::Base
   def create_transaction(ride)
     reference = SecureRandom.hex(20)
     rider = Rider.find(ride.rider_id)
-    p ride.charge.to_int
     response = HTTParty.post('https://sandbox.wompi.co/v1/transactions',
                              body: {
                                "amount_in_cents": ride.charge.to_int * 100,
@@ -52,7 +51,6 @@ class Driver < ActiveRecord::Base
                                "payment_source_id": PaymentSource.find(rider.payment_source_id).payment_source_id
                              }.to_json,
                              headers: { 'Authorization' => 'Bearer prv_test_DbbddTKp7a8oH909sRs0NWH6eYDQ9Gix' })
-    p response
     tr = Transaction.create(
       ride_id: ride.id,
       driver_id: ride.driver_id,

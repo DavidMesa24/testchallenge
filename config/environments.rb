@@ -8,7 +8,6 @@ configure :production, :development do
 end
 
 configure :test do
-  p "a"
   uri_t = URI.parse(ENV['ELEPHANTSQL_URL'] || 'postgres://sxxrdthy:e327938wshO27Z-i6zQbDz9t8gNVCdpV@babar.db.elephantsql.com/sxxrdthy')
   ActiveRecord::Base.establish_connection(adapter: 'postgresql', host: uri_t.host, username: uri_t.user, password: uri_t.password, database: uri_t.path.sub('/', ''))
 end
