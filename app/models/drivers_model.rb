@@ -10,34 +10,18 @@ class Driver < ActiveRecord::Base
     Driver.all.to_json
   end
 
-  def self.token_card(id)
-    driver = Driver.find(id)
-    response = HTTParty.post('https://sandbox.wompi.co/v1/tokens/cards',
-                             body: {
-                               "number": '4242424242424242',
-                               "cvc": '789',
-                               "exp_month": '12',
-                               "exp_year": '29',
-                               "card_holder": 'Pedro Pérez'
-                             }.to_json,
-                             headers: { 'Authorization' => 'Bearer pub_test_vRiYJPMwTtNYXScYZKyTF75jrSQS65A4' })
-    driver.update(token: response['data']['id'])
-    driver
-  end
-
   def finish_ride(id)
-    driver = Driver.find(id)
-    ride = Ride.where(driver_id: driver.id, status: 'IN_PROGRESS').first
+    ride = Ride.where(driver_id: self.id, status: 'IN_PROGRESS').first
     if !ride.nil?
-      ride.final_latitude = driver.current_latitude
-      ride.final_longitude = driver.current_longitude
+      ride.final_latitude = current_latitude
+      ride.final_longitude = current_longitude
       ride.distance_km = ride.calculate_distance
       ride.calculate_total_amount
       ride.update(status: 'FINISHED')
       ride.save
-      driver.update(status: 'ACTIVE')
+      update(status: 'ACTIVE')
       create_transaction(ride)
-      driver.save
+      save
 
       ride
     else

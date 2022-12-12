@@ -13,10 +13,6 @@ class DriversController < Sinatra::Base
     driver
   end
 
-  def self.token_card(id)
-    driver = Driver.find(id)
-    driver.token_card
-  end
 
   def self.finish_ride(id)
     @driver = Driver.find(id)

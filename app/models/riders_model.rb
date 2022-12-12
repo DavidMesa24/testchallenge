@@ -13,7 +13,6 @@ class Rider < ActiveRecord::Base
   end
 
   def token_card(id)
-    rider = Rider.find(id)
     response = HTTParty.post('https://sandbox.wompi.co/v1/tokens/cards',
                              body: {
                                "number": '4242424242424242',
@@ -22,39 +21,35 @@ class Rider < ActiveRecord::Base
                                "exp_year": '29',
                                "card_holder": 'Pedro Pérez'
                              }.to_json,
-                             headers: { 'Authorization' => 'Bearer pub_test_vRiYJPMwTtNYXScYZKyTF75jrSQS65A4' }
-    )
-    rider.update(token: response['data']['id'])
-    rider
+                             headers: { 'Authorization' => 'Bearer pub_test_vRiYJPMwTtNYXScYZKyTF75jrSQS65A4' })
+    update(token: response['data']['id'])
+    self
   end
 
   def payment_source(id)
-    rider = Rider.find(id)
     # Acceptance token first
 
     r_acceptance_token = HTTParty.get('https://sandbox.wompi.co/v1/merchants/pub_test_vRiYJPMwTtNYXScYZKyTF75jrSQS65A4')
-    rider.acceptance_token = r_acceptance_token.parsed_response['data']['presigned_acceptance']['acceptance_token']
+    self.acceptance_token = r_acceptance_token.parsed_response['data']['presigned_acceptance']['acceptance_token']
 
     # Payment source
     response = HTTParty.post('https://sandbox.wompi.co/v1/payment_sources',
-                             :body => {
+                             body: {
                                "type": 'CARD',
-                               "token": rider.token,
-                               "customer_email": rider.email,
-                               "acceptance_token": rider.acceptance_token
+                               "token": token,
+                               "customer_email": email,
+                               "acceptance_token": acceptance_token
                              }.to_json,
-                             :headers => { 'Authorization' => 'Bearer prv_test_DbbddTKp7a8oH909sRs0NWH6eYDQ9Gix
-      ' }
-    )
+                             headers: { 'Authorization' => 'Bearer prv_test_DbbddTKp7a8oH909sRs0NWH6eYDQ9Gix
+      ' })
 
-    p response
     payment_source = PaymentSource.create(
       payment_source_id: response.parsed_response['data']['id'],
       method: 'CARD'
     )
-    rider.payment_source_id = payment_source.id
-    rider.save
-    rider
+    self.payment_source_id = payment_source.id
+    save
+    self
   end
 
   def request_ride(id)
