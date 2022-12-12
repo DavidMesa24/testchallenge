@@ -53,12 +53,18 @@ RSpec.describe DriversController, type: :controller do
   end
 
   describe 'Ryder', type: :model do
-    it 'can request a ride' do
-      rider = Rider.create(rider)
-      ride = rider.request_ride(2)
-      driver = Driver.find(ride.driver_id)
-      driver.finish_ride(ride.id)
-      expect(ride).to eq(Ride.last)
+    before do
+      it 'can request a ride' do
+        rider = Rider.create(rider)
+        ride = rider.request_ride(2)
+        expect(ride).to eq(Ride.last)
+      end
+      after do
+        it 'can finish a ride' do
+          driver = Driver.find(ride.driver_id)
+          driver.finish_ride(ride.id)
+        end
+      end
     end
   end
 end
