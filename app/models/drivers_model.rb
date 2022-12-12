@@ -27,8 +27,8 @@ class Driver < ActiveRecord::Base
     else
       error = {
         "error": {
-          "type":"NOT_FOUND",
-          "reason":"No ride in progress"
+          "type":'NOT_FOUND',
+          "reason":'No ride in progress'
         }
       }
       error
@@ -42,7 +42,7 @@ class Driver < ActiveRecord::Base
     response = HTTParty.post('https://sandbox.wompi.co/v1/transactions',
                              body: {
                                "amount_in_cents": ride.charge.to_int * 100,
-                               "currency": "COP",
+                               "currency": 'COP',
                                "customer_email": rider.email,
                                "payment_method": {
                                  "installments": 1

@@ -11,7 +11,7 @@
   
 ## Test ##
 * You can test the app with command $ `bundle exec rspec`
-* You should have 16 tests and 0 errors (I hope)
+* You should have 14 tests and 0 errors (I hope)
 ## Endpoints ##
 ### v1/ ###
 #### GET ####
@@ -35,7 +35,7 @@
 
 ![img_3.png](images/img_3.png)
 
-* Rider (id:7) Request a ride (The program asign a free driver to the rider. Is there not a free driver, indicates an error. The ride start at rider position)
+* Rider (id:7) Request a ride (The program assign a free driver to the rider. Is there not a free driver, indicates an error. The ride start at rider position)
 
 ![img_4.png](images/img_4.png)
 
